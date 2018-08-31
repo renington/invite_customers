@@ -20,6 +20,12 @@ class CustomerRecord
         @@customers = @@customers.select { |customer| d.distance(customer.latitude, customer.longitude, source_point.latitude.to_f, source_point.longitude.to_f) <= distance.to_f }
     end
 
+    def sort_by_id(order: "asc")
+        if order == "asc"
+            @@customers = @@customers.sort_by { |customer| customer.id }
+        end
+    end
+
     private 
     def parse(lines)
         lines.each_line.map do |line| 

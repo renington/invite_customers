@@ -9,10 +9,10 @@ describe CustomerRecord do
 
         # Maybe create another class for that, like Reader.
         # it 'is a valid format' do
-        #     expect( customers[0].fetch("user_id") ).to be_kind_of(Fixnum)
-        #     expect( customers[0].fetch("name") ).to be_kind_of(String)
-        #     expect( customers[0].fetch("latitude") ).to be_kind_of(String)
-        #     expect( customers[0].fetch("longitude") ).to be_kind_of(String)
+        #     expect( customers.first.fetch("user_id") ).to be_kind_of(Fixnum)
+        #     expect( customers.first.fetch("name") ).to be_kind_of(String)
+        #     expect( customers.first.fetch("latitude") ).to be_kind_of(String)
+        #     expect( customers.first.fetch("longitude") ).to be_kind_of(String)
         # end
         
         it 'should return an array' do
@@ -20,7 +20,7 @@ describe CustomerRecord do
         end
 
         it 'should return a Customer' do
-            expect( customers[0] ).to be_a Customer
+            expect( customers.first ).to be_a Customer
         end
         
         it 'is not found' do
@@ -30,12 +30,20 @@ describe CustomerRecord do
     
     context 'when the CustomerRecord found customers' do
         it 'is valid customer' do
-            expect( customers[0].id ).to eq(12)
-            expect( customers[0].name ).to eq("Christina McArdle")
+            expect( customers.first.id ).to eq(12)
+            expect( customers.first.name ).to eq("Christina McArdle")
         end
 
-        it 'more than one' do
+        it 'greater than one' do
             expect( customers.count ).to eq(2)
+        end
+    end
+
+    context 'when sorting results' do
+        it 'is ASC default' do
+            customers = subject.sort_by_id
+            expect( customers.first.id ).to eq(1)
+            expect( customers.last.id ).to eq(12)
         end
     end
 
