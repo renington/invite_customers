@@ -8,7 +8,7 @@ class CustomerRecord
     def read_from_txt(path)
         begin
             lines = File.open(path, 'r')
-        rescue Exception => e  
+        rescue 
             raise RuntimeError, "File not found"
         end
 
@@ -28,14 +28,18 @@ class CustomerRecord
 
     private 
     def parse(lines)
-        lines.each_line.map do |line| 
-            customer_array = JSON.parse(line) 
-            Customer.new(
-                customer_array["user_id"], 
-                customer_array["name"],
-                customer_array["latitude"],
-                customer_array["longitude"],
-            )
+        begin
+            lines.each_line.map do |line| 
+                customer_array = JSON.parse(line) 
+                Customer.new(
+                    customer_array["user_id"], 
+                    customer_array["name"],
+                    customer_array["latitude"],
+                    customer_array["longitude"],
+                    )
+                end
+            end
+        rescue
+            raise RuntimeError, "Invalid format"
         end
-    end
 end
