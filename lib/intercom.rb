@@ -1,4 +1,4 @@
-require 'customer_record'
+require_relative 'customer_record'
 
 class Intercom
     attr_reader :office, :latitude, :longitude

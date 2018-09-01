@@ -1,6 +1,6 @@
 require 'json'
-require 'distance'
-require 'customer'
+require_relative 'distance'
+require_relative 'customer'
 
 class CustomerRecord
     @@customers = nil
